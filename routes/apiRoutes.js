@@ -19,4 +19,19 @@ module.exports = function (app) {
     });
     res.json(db);
   });
+// DELETE Requests
+app.delete("/api/notes/:id", function (req, res) {
+    let noteId = req.params.id;
+    let newId = 0;
+    console.log(`Deleting note with id ${noteId}`);
+    db = db.filter((currentNote) => {
+      return currentNote.id != noteId;
+    });
+    for (currentNote of db) {
+      currentNote.id = newId.toString();
+      newId++;
+    }
+    fs.writeFileSync("./db/db.json", JSON.stringify(db));
+    res.json(db);
+  });
 };
