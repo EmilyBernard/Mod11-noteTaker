@@ -1,21 +1,20 @@
 # Note Taker
-
-
+This application makes it easy to keep a list of notes, thoughts, and whatever else you'd like to track of.  Users are also able to delete notes no longer needed.
 
 # Project Status
 Submitted for evaluation
 
 # Project Deployed
 
-https://github
+https://github.com/EmilyBernard/Mod11-noteTaker
 <br>
-https://e
+https://no-te-ta-ker.herokuapp.com/
 
 # Starter Code
-
+https://github.com/coding-boot-camp/miniature-eureka
 
 # Screenshot of webpage
-<img src="" alt="Website Screenshot">
+<img src="noteTakerSample.png" alt="Website Screenshot">
 
 
 # User Story
