@@ -19,20 +19,15 @@ module.exports = function (app) {
   //POST
   app.post("/api/notes", (req, res) => {
     console.log(req.body);
-      const {title, text,} = req.body;
-      if (title && text) {
-      const newNote = {
-        title,
-        text,
-        id: id,
-      };
+      const newNote = req.body;
+      const id = db.length.toString();
     db.push(newNote);
 
     fs.writeFileSync("./db/db.json", JSON.stringify(db), function (err) {
       if (err) throw err;
     });
     res.json(db);
-  }});
+  });
 
   //DELETE
   app.delete("/api/notes/:id", (req, res) => {
