@@ -5,10 +5,18 @@ let db = require("../db/db.json");
 
 
 module.exports = function (app) {
-  app.get("/api/notes", function (req, res) {
-    res.json(db);
+  
+  app.get("/api/notes", (req, res) => {
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+      if (err) {
+        console.error(err);
+      } else {
+        res.json(JSON.parse(data))
+      }
+    });
   });
-  app.post("/api/notes", function (req, res) {
+  
+  app.post("/api/notes", (req, res) => {
     const newNote = req.body;
     const id = db.length.toString();
     newNote.id = id;
