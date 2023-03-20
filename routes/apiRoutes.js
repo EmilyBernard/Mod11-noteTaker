@@ -25,7 +25,11 @@ module.exports = function (app) {
     db.push(addNote);
 
     fs.writeFileSync("./db/db.json", JSON.stringify(db), function (err) {
-      if (err) throw err;
+      if (err) {
+        console.error(err);
+      } else {
+        res.json(JSON.parse(data))
+      }
     });
     res.json(db);
   });
