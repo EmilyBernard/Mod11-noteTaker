@@ -19,9 +19,10 @@ module.exports = function (app) {
   //POST
   app.post("/api/notes", (req, res) => {
     console.log(req.body);
-      const newNote = req.body;
+      const addNote = req.body;
       const id = db.length.toString();
-    db.push(newNote);
+      addNote.id = id;
+    db.push(addNote);
 
     fs.writeFileSync("./db/db.json", JSON.stringify(db), function (err) {
       if (err) throw err;
