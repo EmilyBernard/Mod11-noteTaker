@@ -1,5 +1,6 @@
 const fs = require("fs");
-let db = require("../db/db.json");
+const db = require("../db/db.json");
+const express = require("express");
 
 module.exports = function (app) {
   app.get("/api/notes", function (res) {
