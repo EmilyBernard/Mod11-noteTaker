@@ -33,18 +33,18 @@ module.exports = function (app) {
   //DELETE
   app.delete("/api/notes/:id", (req, res) => {
     let noteId = req.params.id;
-    let deleteID = 0;
+    let id = 0;
     db = db.filter((note) => {
       return note.id != noteId;
     });
     for (note of db) {
-      note.id = deleteId.toString();
-      deleteId++;
+      note.id = id.toString();
+      id++;
     }
    //let db = JSON.parse(fs.readFileSync('./db/db.json'))
     //let deleteNote = db.filter(item => item.id !== req.params.id); 
        
     fs.writeFileSync('./db/db.json', JSON.stringify(db));
     res.json(db);        
-      });
+    })
 };
