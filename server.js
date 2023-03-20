@@ -9,7 +9,7 @@ app.use(express.static('public'));
 const routerapi = require('./routes/apiRoutes')(app);
 const routerhtml = require('./routes/htmlRoutes')(app);
 
-app.listen(PORT, function() =>
+app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
 );
 
