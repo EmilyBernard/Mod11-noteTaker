@@ -1,9 +1,11 @@
+const express = require("express");
+const path = require("path");
 const fs = require("fs");
 const db = require("../db/db.json");
-const express = require("express");
+
 
 module.exports = function (app) {
-  app.get("/api/notes", function (res) {
+  app.get("/api/notes", function (req, res) {
     res.json(db);
   });
   app.post("/api/notes", function (req, res) {
