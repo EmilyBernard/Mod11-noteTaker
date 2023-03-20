@@ -1,17 +1,13 @@
-const express = require("express");
 const fs = require("fs");
-const path = require("path");
 let db = require("../db/db.json");
 
 module.exports = function (app) {
-  //API GET Requests
   app.get("/api/notes", function (req, res) {
     res.json(db);
   });
-  //API POST Requests
   app.post("/api/notes", function (req, res) {
-    let newNote = req.body;
-    let id = db.length.toString();
+    const newNote = req.body;
+    const id = db.length.toString();
     newNote.id = id;
     db.push(newNote);
     fs.writeFileSync("./db/db.json", JSON.stringify(db), function (err) {
@@ -19,11 +15,9 @@ module.exports = function (app) {
     });
     res.json(db);
   });
-// DELETE Requests
 app.delete("/api/notes/:id", function (req, res) {
-    let noteId = req.params.id;
-    let newId = 0;
-    console.log(`Deleting note with id ${noteId}`);
+    const noteId = req.params.id;
+    const newId = 0;
     db = db.filter((currentNote) => {
       return currentNote.id != noteId;
     });
