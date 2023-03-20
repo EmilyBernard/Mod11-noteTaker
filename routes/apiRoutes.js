@@ -5,7 +5,7 @@ let db = require("../db/db.json");
 
 
 module.exports = function (app) {
-  
+  //GET
   app.get("/api/notes", (req, res) => {
     fs.readFile('./db/db.json', 'utf8', (err, data) => {
       if (err) {
@@ -15,7 +15,7 @@ module.exports = function (app) {
       }
     });
   });
-  
+  //POST
   app.post("/api/notes", (req, res) => {
     const newNote = req.body;
     const id = db.length.toString();
@@ -26,17 +26,11 @@ module.exports = function (app) {
     });
     res.json(db);
   });
-app.delete("/api/notes/:id", function (req, res) {
-    const noteId = req.params.id;
-    const newId = 0;
-    db = db.filter((note) => {
-      return note.id != noteId;
-    });
-    for (note of db) {
-      note.id = newId.toString();
-      newId++;
-    }
-    fs.writeFileSync("./db/db.json", JSON.stringify(db));
-    res.json(db);
-  });
+  //DELETE
+  app.delete("/api/notes/:id", (req, res) => {
+    let db = JSON.parse(fs.readFileSync('./db/db.json'))
+    let deleteNotes = db.filter(item => item.id !== req.params.id);    
+    fs.writeFileSync('./db/db.json', JSON.stringify(deleteNotes));
+    res.json(deleteNotes);        
+      })
 };
