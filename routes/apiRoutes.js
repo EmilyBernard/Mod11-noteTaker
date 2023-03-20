@@ -15,22 +15,31 @@ module.exports = function (app) {
       }
     });
   });
+
   //POST
   app.post("/api/notes", (req, res) => {
-    const newNote = req.body;
-    const id = db.length.toString();
-    newNote.id = id;
+    console.log(req.body);
+      const {title, text,} = req.body;
+      if (title && text) {
+      const newNote = {
+        title,
+        text,
+        id: id,
+      };
     db.push(newNote);
+
     fs.writeFileSync("./db/db.json", JSON.stringify(db), function (err) {
       if (err) throw err;
     });
     res.json(db);
-  });
+  }});
+
   //DELETE
   app.delete("/api/notes/:id", (req, res) => {
     let db = JSON.parse(fs.readFileSync('./db/db.json'))
-    let deleteNotes = db.filter(item => item.id !== req.params.id);    
-    fs.writeFileSync('./db/db.json', JSON.stringify(deleteNotes));
-    res.json(deleteNotes);        
+    let deleteNote = db.filter(item => item.id !== req.params.id); 
+       
+    fs.writeFileSync('./db/db.json', JSON.stringify(deleteNote));
+    res.json(deleteNote);        
       })
 };
