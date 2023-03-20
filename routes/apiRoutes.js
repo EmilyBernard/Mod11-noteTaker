@@ -2,7 +2,7 @@ const fs = require("fs");
 let db = require("../db/db.json");
 
 module.exports = function (app) {
-  app.get("/api/notes", function (req, res) {
+  app.get("/api/notes", function (res) {
     res.json(db);
   });
   app.post("/api/notes", function (req, res) {
@@ -18,11 +18,11 @@ module.exports = function (app) {
 app.delete("/api/notes/:id", function (req, res) {
     const noteId = req.params.id;
     const newId = 0;
-    db = db.filter((currentNote) => {
-      return currentNote.id != noteId;
+    db = db.filter((note) => {
+      return note.id != noteId;
     });
-    for (currentNote of db) {
-      currentNote.id = newId.toString();
+    for (note of db) {
+      note.id = newId.toString();
       newId++;
     }
     fs.writeFileSync("./db/db.json", JSON.stringify(db));
