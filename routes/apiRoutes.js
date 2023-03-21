@@ -5,14 +5,6 @@ let db = require("../db/db.json");
 
 
 module.exports = function (app) {
-  app.get("/notes", function (req,res) {
-    res.sendFile(path.join(__dirname, "../public/notes.html"));
-  });
-
-  app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/index.html"));
-  });
-
   //GET
   app.get("/api/notes", (req, res) => {
     fs.readFile('./db/db.json', 'utf8', (err, data) => {
@@ -53,14 +45,8 @@ module.exports = function (app) {
       note.id = id.toString();
       id++;
     }
-   //let db = JSON.parse(fs.readFileSync('./db/db.json'))
-    //let deleteNote = db.filter(item => item.id !== req.params.id); 
        
     fs.writeFileSync('./db/db.json', JSON.stringify(db));
     res.json(db);        
     })
 };
-
-// module.exports = function (app) {
-
-// };
