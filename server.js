@@ -12,7 +12,7 @@ app.use(express.json());
 
 app.use(express.static('public'));
 
-const routerapi = require('./apiRoutes')(app);
+const routerAPI = require('./apiRoutes')(app);
 
 // GET route for notes page
 app.get("/notes", (req, res) => {
