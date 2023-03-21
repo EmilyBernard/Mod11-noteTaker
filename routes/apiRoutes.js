@@ -5,6 +5,14 @@ let db = require("../db/db.json");
 
 
 module.exports = function (app) {
+  app.get("/notes", function (req,res) {
+    res.sendFile(path.join(__dirname, "../public/notes.html"));
+  });
+
+  app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/index.html"));
+  });
+
   //GET
   app.get("/api/notes", (req, res) => {
     fs.readFile('./db/db.json', 'utf8', (err, data) => {
@@ -53,12 +61,6 @@ module.exports = function (app) {
     })
 };
 
-module.exports = function (app) {
-  app.get("/notes", function (req,res) {
-    res.sendFile(path.join(__dirname, "../public/notes.html"));
-  });
+// module.exports = function (app) {
 
-  app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/index.html"));
-  });
-};
+// };
